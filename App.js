@@ -4,7 +4,7 @@ import Modal from "./src/components/Modal";
 import AddItem from "./src/components/AddItem";
 
 export default function App() {
-  const [textItem, setTextItem ] = useState('')
+  const [textItem, setTextItem ] = useState("")
 
   const [list, setList ] = useState([])
 
@@ -23,57 +23,56 @@ export default function App() {
 
   const handleModal = item => {
     console.log(item)
-  setItemSelected(item)
-  setModalVisible(true)
+    setItemSelected(item)
+    setModalVisible(true)
   }
 
-  const onHandleDelete = (item) => {
+  const onHandleDelete = item => {
     console.log(item)
-    setList(prevState => prevState.filter(element => element === item))
+    setList(prevState => prevState.filter(element => element !== item))
     setModalVisible(!modalVisible)
   }
 
   const renderItem = ({item}) => (
     <View style={styles.renderItemStyle}>
       <Text>{item}</Text>
-      <Button title="edit" onPress={() => handleModal(item)}/>
-      <Button/>
+      <Button title="Edit" onPress={() => handleModal(item)}/>
     </View>
   )
 
   return (
     <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text>Hola, Coder!</Text>
+          <Text style={styles.title}>Hola, Coder!</Text>
           <AddItem
           onChange={onHandleChangeItem}
           textValue={textItem}
           onAddItem={addItem}
           />
         </View>
-        <View style={{flex: 2, backgroundColor: "white" }}>
+        <View style={styles.container}>
           <FlatList
           style={styles.listContainer}
           data={list}
-          keyExtractor={(item)=> item.id}
+          keyExtractor={item=> item}
           renderItem={renderItem}
           />
-          <Text>Created by Gonzalo Ian Pelozo, 2023©.</Text>
+          <Text>Design by Gonzalo Ian Pelozo, 2023©.</Text>
         </View>
 
       <Modal 
       isVisible={modalVisible}
       itemSelected = {itemSelected} 
       actionDeleteItem={() => onHandleDelete(itemSelected)}
-      onDismissModal ={() => setModalVisible(false) }/>
+      onDismissModal ={setModalVisible}/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#2D3137",
+    flex: 2,
+    backgroundColor: "orange",
     padding: 50, 
     paddingTop: 80,
   },
@@ -81,6 +80,7 @@ const styles = StyleSheet.create({
     height: 200,
     padding: 50,
     backgroundColor: "#380099",
+    borderRadius: 20,
 
   },
   titleText: {
