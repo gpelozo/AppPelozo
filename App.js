@@ -43,7 +43,7 @@ export default function App() {
   return (
     <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Hola, Coder!</Text>
+          <Text style={styles.titleText}>Hola, Coder!</Text>
           <AddItem
           onChange={onHandleChangeItem}
           textValue={textItem}
